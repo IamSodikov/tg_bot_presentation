@@ -1,0 +1,18 @@
+[
+    {
+        "image_path": "data/transactions/1.jpg",
+        "caption": "🔰 Платёж отправлен 🔰\n\nПроверьте поступление и переведите криптовалюту по ссылке:\n\nhttps://link.trustwallet.com/send?address=TVk3SFUVETjmqEjLHvZA8SJKYeHnQt3vub&asset=usdt&amount=1*0.27≈428&network=trc20"
+    },
+    {
+        "image_path": "data/transactions/2.jpg",
+        "caption": "🎯Платёж подтвержден!\n\n✳️Profit 59.44$\n\nhttps://tronscan.org/#/address/TVfXf9nYchabwN9hQnrZrXVmKfXF3QLKQM"
+    },
+    {
+        "image_path": "data/transactions/3.jpg",
+        "caption": "🔰 Платёж отправлен 🔰\n\nПроверьте поступление и переведите криптовалюту по ссылке:\n\nhttps://link.trustwallet.com/send?address=TVk3SFUVETjmqEjLHvZA8SJKYeHnQt3vub&asset=usdt&amount=1*0.27≈442&network=trc20"
+    },
+    {
+        "image_path": "data/transactions/4.jpg",
+        "caption": "🎯Платёж подтвержден!\n\n✳️Profit 62.83$\n\nhttps://tronscan.org/#/address/TF5zKmVKHftUWEMvMnfw9MKQ2WUAKgBioE"
+    }
+]
