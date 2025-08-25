@@ -1,15 +1,29 @@
 import os
 from telegram import Update
-from telegram.ext import ContextTypes, CommandHandler, ConversationHandler, MessageHandler, filters
-from handlers.menu_handler import build_menu
+from telegram.ext import (
+    ContextTypes,
+    CommandHandler,
+    ConversationHandler,
+    MessageHandler,
+    filters,
+)
+from handlers.menu_handler import build_menu, build_admin_menu
 from utils.storage import set_user_token
 from handlers.personal_handler import personal_info  # Qo'shildi
 
 WAITING_TOKEN = 1
 
-def load_tokens() -> set[str]:
-    raw = os.getenv("TOKENS")
-    return {t.strip() for t in raw.split(",") if t.strip()}
+
+def load_tokens() -> dict[str, str]:
+    raw = os.getenv("TOKENS") or ""
+    tokens: dict[str, str] = {}
+    for item in raw.split(","):
+        item = item.strip()
+        if not item:
+            continue
+        token, _, role = item.partition(":")
+        tokens[token] = role or "user"
+    return tokens
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     tokens = load_tokens()
@@ -23,10 +37,12 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def check_token(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_input = (update.message.text or "").strip()
     tokens = load_tokens()
-    
-    if user_input in tokens:
+
+    role = tokens.get(user_input)
+    if role:
         set_user_token(update.effective_user.id, user_input)
-        await update.message.reply_text("Успешная авторизация✅", reply_markup=build_menu())
+        menu = build_admin_menu() if role == "admin" else build_menu()
+        await update.message.reply_text("Успешная авторизация✅", reply_markup=menu)
         # Lichniy kabinet ma'lumotlarini ham yuborish
         await personal_info(update, context)
         return ConversationHandler.END

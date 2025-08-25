@@ -11,6 +11,15 @@ def build_menu() -> ReplyKeyboardMarkup:
     reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
     return reply_markup
 
+
+def build_admin_menu() -> ReplyKeyboardMarkup:
+    keyboard = [
+        [KeyboardButton("🟢 В онлайн: ON"), KeyboardButton("🔴 Отключиться: OFF")],
+        [KeyboardButton("💳 Мои реквизиты"), KeyboardButton("♻️ Транзакцию обновить")],
+    ]
+
+    return ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
+
 def personal_inline_kb() -> InlineKeyboardMarkup:
     keyboard = [
         [InlineKeyboardButton("⚙️ Настроить лимиты", callback_data="pi:set_limits")],
@@ -44,6 +53,8 @@ def manage_requisites_inline_kb(rid: str, modes: List[str] | None = None) -> Inl
         ]
     ]
     return InlineKeyboardMarkup(keyboard)
+
+
 def support_inline_kb() -> InlineKeyboardMarkup:
     keyboard = [
         [InlineKeyboardButton("@sigmapay_support", url="https://t.me/sigmapay_support")]
