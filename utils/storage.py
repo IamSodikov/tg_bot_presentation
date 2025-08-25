@@ -173,6 +173,18 @@ def get_user_token(user_id: int) -> Optional[str]:
     db = _load_db()
     return db.get(str(user_id), {}).get("token")
 
+def set_user_role(user_id: int, role: str) -> None:
+    db = _load_db()
+    key = str(user_id)
+    user = db.get(key, {})
+    user["role"] = role
+    db[key] = user
+    _save_db(db)
+
+def get_user_role(user_id: int) -> str:
+    db = _load_db()
+    return db.get(str(user_id), {}).get("role", "user")
+
 def set_user_limits(user_id: int, limits: Dict[str, Any])-> None:
     db = _load_db()
     key = str(user_id)
