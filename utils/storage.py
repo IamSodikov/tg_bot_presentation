@@ -199,3 +199,19 @@ def get_user_status(user_id: int) -> str:
     db = _load_db()
     return db.get(str(user_id), {}).get("status", "offline")
 
+
+def set_user_role(user_id: int, role: str) -> None:
+    """Save a user's role (e.g., 'admin')."""
+    db = _load_db()
+    key = str(user_id)
+    user = db.get(key, {})
+    user["role"] = role
+    db[key] = user
+    _save_db(db)
+
+
+def get_user_role(user_id: int) -> str:
+    """Return user's role, defaults to 'user'."""
+    db = _load_db()
+    return db.get(str(user_id), {}).get("role", "user")
+
